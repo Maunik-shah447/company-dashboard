@@ -1,16 +1,23 @@
+// app/page.tsx
 export const revalidate = 0; 
 
 import { supabase } from '../utils/supabase';
 import { redirect } from 'next/navigation';
 
 export default async function Dashboard() {
-  // Fetch data from database
+  // SECURITY GUARD: Check if user is logged in
+  const { data: { session } } = await supabase.auth.getSession();
+
+  // If not logged in, boot them out to the login page immediately
+  if (!session) {
+    redirect('/login');
+  }
+
   const { data: products } = await supabase
     .from('products')
     .select('*')
     .order('created_at', { ascending: false });
 
-  // Function to add new data
   async function addProduct(formData: FormData) {
     'use server' 
     const title = formData.get('title') as string;
@@ -23,9 +30,22 @@ export default async function Dashboard() {
     redirect('/'); 
   }
 
+  async function signOut() {
+    'use server'
+    await supabase.auth.signOut();
+    redirect('/login');
+  }
+
   return (
-    <main className="p-10 max-w-4xl mx-auto font-sans">
-      <h1 className="text-3xl font-bold mb-8">Company Dashboard</h1>
+    <main className="p-10 max-w-4xl mx-auto font-sans text-gray-900">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Company Dashboard</h1>
+        <form action={signOut}>
+          <button type="submit" className="text-sm bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded text-gray-700 font-medium transition">
+            Sign Out
+          </button>
+        </form>
+      </div>
 
       <div className="bg-gray-100 p-6 rounded-lg mb-10">
         <h2 className="text-xl font-semibold mb-4">Add New Product</h2>
@@ -33,7 +53,7 @@ export default async function Dashboard() {
           <input type="text" name="title" placeholder="Product Title" required className="p-2 border border-gray-300 rounded" />
           <input type="number" name="price" placeholder="Price ($)" step="0.01" required className="p-2 border border-gray-300 rounded" />
           <textarea name="description" placeholder="Product Description" className="p-2 border border-gray-300 rounded" />
-          <button type="submit" className="bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700">
+          <button type="submit" className="bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700 transition">
             Save Product
           </button>
         </form>
