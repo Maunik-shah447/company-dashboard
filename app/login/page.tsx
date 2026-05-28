@@ -18,7 +18,6 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
 
-    // Live Supabase Authentication Layer
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -33,7 +32,6 @@ export default function LoginPage() {
     }
   };
 
-  // Modern Clean System Font Stack to completely kill Times New Roman
   const globalFont = {
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
   };
@@ -54,7 +52,6 @@ export default function LoginPage() {
         ...globalFont
       }}
     >
-      {/* Background Matrix Mesh Accent */}
       <div
         aria-hidden
         style={{
@@ -68,7 +65,6 @@ export default function LoginPage() {
         }}
       />
       
-      {/* High-End Vector Ambient Blue Glow */}
       <div
         aria-hidden
         style={{
@@ -85,7 +81,6 @@ export default function LoginPage() {
       />
 
       <div style={{ position: "relative", width: "100%", maxWidth: "420px", zIndex: 10 }}>
-        {/* Floating Executive Interface Card */}
         <section
           style={{
             backgroundColor: "#ffffff",
@@ -97,7 +92,6 @@ export default function LoginPage() {
             boxSizing: "border-box"
           }}
         >
-          {/* Brand Presentation Section */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "32px" }}>
             <div style={{
               height: "76px",
@@ -114,7 +108,7 @@ export default function LoginPage() {
             }}>
               <img
                 src="/oan-logo.png"
-                alt="OAN Industries Limited logo"[cite: 1]
+                alt="OAN Industries Limited logo"
                 style={{ height: "100%", width: "100%", objectFit: "contain", padding: "10px" }}
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -123,14 +117,13 @@ export default function LoginPage() {
               />
             </div>
             <h1 style={{ fontSize: "22px", fontWeight: "700", letterSpacing: "-0.02em", color: "#0f172a", margin: "0 0 4px 0" }}>
-              OAN Industries Limited[cite: 1]
+              OAN Industries Limited
             </h1>
             <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "#64748b", margin: 0 }}>
               Enterprise Hub
             </p>
           </div>
 
-          {/* Secure Diagnostic Warning Banner */}
           {error && (
             <div style={{
               display: "flex",
@@ -148,7 +141,6 @@ export default function LoginPage() {
           )}
 
           <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }} noValidate>
-            {/* Account Identifier Input Form */}
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               <label htmlFor="email" style={{ fontSize: "13px", fontWeight: "600", color: "#475569" }}>
                 Email Address
@@ -179,7 +171,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Cryptographic Protection Input Form */}
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
               <label htmlFor="password" style={{ fontSize: "13px", fontWeight: "600", color: "#475569" }}>
                 Password
@@ -210,7 +201,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Authorization Submission Trigger */}
             <button
               type="submit"
               disabled={loading}
@@ -236,7 +226,7 @@ export default function LoginPage() {
               {loading ? (
                 <>
                   <Loader2 style={{ height: "16px", width: "16px", animation: "spin 1s linear infinite" }} />
-                  Verifying Gateway Token…
+                  Authenticating…
                 </>
               ) : (
                 "Sign In"
@@ -244,20 +234,18 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div style={{ marginTop: "24px", textBreak: "none", textAlign: "center" }}>
+          <div style={{ marginTop: "24px", textAlign: "center" }}>
             <span style={{ fontSize: "12px", fontWeight: "500", color: "#94a3b8", textDecoration: "none" }}>
               Forgot password? Contact Systems Admin
             </span>
           </div>
         </section>
 
-        {/* Global Access Protocol Warning Banner */}
         <p style={{ marginTop: "28px", textAlign: "center", fontSize: "11px", color: "#64748b", padding: "0 12px", lineHeight: "1.6", fontWeight: "500" }}>
-          Restricted access portal. This is a private operational ecosystem for authorized OAN Industries Limited personnel only[cite: 1]. Active background telemetry monitoring is engaged[cite: 1].
+          Restricted access portal. This is a private operational ecosystem for authorized personnel only. Active background telemetry monitoring is engaged.
         </p>
       </div>
 
-      {/* Basic Keyframe Animation injection for CSS Spinners */}
       <style>{`
         @keyframes spin {
           to { transform: rotate(360deg); }
